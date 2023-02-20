@@ -14,7 +14,7 @@ namespace LanguageSchool.Data
         public DbSet<Course> Courses { get; set; }
         public DbSet<Enrollment> Enrollments { get; set; }
         public DbSet<AgeType> AgeTypes { get; set; }
-        public DbSet<Category> Categories { get; set; }
+        //public DbSet<Category> Categories { get; set; }
 
         public DbSet<Method> Methods { get; set; }
         

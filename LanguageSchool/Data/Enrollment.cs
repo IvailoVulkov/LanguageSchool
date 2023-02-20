@@ -7,8 +7,8 @@
         public string StudentId { get; set; }
         public Student Students { get; set; }
 
-        public int SchoolYearId { get; set; }
 
+        public int SchoolYearId { get; set; }
         public SchoolYear SchoolYears { get; set; }
         
         public int Result { get; set; }
@@ -17,6 +17,8 @@
         //
 
         public DateTime RegData { get; set; }
+
+
 
     }
 }

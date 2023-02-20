@@ -30,9 +30,6 @@ namespace LanguageSchool.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int?>("AgeTypeId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -42,33 +39,7 @@ namespace LanguageSchool.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AgeTypeId");
-
                     b.ToTable("AgeTypes");
-                });
-
-            modelBuilder.Entity("LanguageSchool.Data.Category", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("Adult")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Child")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Enum")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Categories");
                 });
 
             modelBuilder.Entity("LanguageSchool.Data.Course", b =>
@@ -82,9 +53,8 @@ namespace LanguageSchool.Migrations
                     b.Property<int>("AgeTypeId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Category")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Category")
+                        .HasColumnType("int");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -422,17 +392,10 @@ namespace LanguageSchool.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("LanguageSchool.Data.AgeType", b =>
-                {
-                    b.HasOne("LanguageSchool.Data.AgeType", null)
-                        .WithMany("AgeTypes")
-                        .HasForeignKey("AgeTypeId");
-                });
-
             modelBuilder.Entity("LanguageSchool.Data.Course", b =>
                 {
                     b.HasOne("LanguageSchool.Data.AgeType", "AgeTypes")
-                        .WithMany()
+                        .WithMany("Courses")
                         .HasForeignKey("AgeTypeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -449,7 +412,7 @@ namespace LanguageSchool.Migrations
                         .IsRequired();
 
                     b.HasOne("LanguageSchool.Data.Student", "Students")
-                        .WithMany()
+                        .WithMany("Enrollments")
                         .HasForeignKey("StudentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -531,7 +494,7 @@ namespace LanguageSchool.Migrations
 
             modelBuilder.Entity("LanguageSchool.Data.AgeType", b =>
                 {
-                    b.Navigation("AgeTypes");
+                    b.Navigation("Courses");
                 });
 
             modelBuilder.Entity("LanguageSchool.Data.Method", b =>
@@ -540,6 +503,11 @@ namespace LanguageSchool.Migrations
                 });
 
             modelBuilder.Entity("LanguageSchool.Data.SchoolYear", b =>
+                {
+                    b.Navigation("Enrollments");
+                });
+
+            modelBuilder.Entity("LanguageSchool.Data.Student", b =>
                 {
                     b.Navigation("Enrollments");
                 });

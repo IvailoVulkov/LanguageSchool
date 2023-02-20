@@ -8,6 +8,6 @@
 
         public DateTime RegData { get; set; }
 
-        public ICollection<AgeType> AgeTypes { get;set; }
+        public ICollection<Course> Courses { get;set; }
     }
 }

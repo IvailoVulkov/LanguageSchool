@@ -9,8 +9,8 @@ namespace LanguageSchool.Data
         public string LastName { get; set; }
 
         public int Age { get; set; }
-
         
         public DateTime RegData { get; set; }
+        public ICollection<Enrollment> Enrollments { get; set; }
     }
 }

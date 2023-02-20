@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace LanguageSchool.Migrations
 {
-    public partial class LanguageSchool : Migration
+    public partial class Language : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -16,17 +16,11 @@ namespace LanguageSchool.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    RegData = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    AgeTypeId = table.Column<int>(type: "int", nullable: true)
+                    RegData = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AgeTypes", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_AgeTypes_AgeTypes_AgeTypeId",
-                        column: x => x.AgeTypeId,
-                        principalTable: "AgeTypes",
-                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -73,21 +67,6 @@ namespace LanguageSchool.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Categories",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Enum = table.Column<int>(type: "int", nullable: false),
-                    Child = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Adult = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Categories", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Methods",
                 columns: table => new
                 {
@@ -110,7 +89,7 @@ namespace LanguageSchool.Migrations
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Language = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     AgeTypeId = table.Column<int>(type: "int", nullable: false),
-                    Category = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Category = table.Column<int>(type: "int", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Price = table.Column<double>(type: "float", nullable: false),
                     RegData = table.Column<DateTime>(type: "datetime2", nullable: false)
@@ -294,11 +273,6 @@ namespace LanguageSchool.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_AgeTypes_AgeTypeId",
-                table: "AgeTypes",
-                column: "AgeTypeId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
                 column: "RoleId");
@@ -379,9 +353,6 @@ namespace LanguageSchool.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
-
-            migrationBuilder.DropTable(
-                name: "Categories");
 
             migrationBuilder.DropTable(
                 name: "Enrollments");
